@@ -105,7 +105,7 @@ flowchart LR
 ## Repository Structure
 
 ```text
-📦 Project_End-to-End-MLOps-Pipeline...
+Project_End-to-End-MLOps-Pipeline...
  ┣ 📂 .github
  ┃ ┗ 📂 workflows
  ┃   ┗ 📜 pipeline.yml             # GitHub Actions CI/CD configuration
