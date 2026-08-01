@@ -43,6 +43,14 @@ CATEGORICAL_COLS = [
     "ProductPitched", "MaritalStatus", "Designation"
 ]
 
+# Trusted model types required by MLflow's sklearn flavor when persisting
+# an sklearn pipeline that wraps XGBoost estimators.
+SKOPS_TRUSTED_TYPES = [
+    "numpy.dtype",
+    "xgboost.core.Booster",
+    "xgboost.sklearn.XGBClassifier",
+]
+
 
 def detect_gpu():
     """Check for NVIDIA GPU availability."""
@@ -195,7 +203,11 @@ def main():
         print(f"\nClassification Report:\n{report}")
 
         # ── Log Model to MLflow ───────────────────────────────────────────
-        mlflow.sklearn.log_model(best_model, "xgboost-pipeline")
+        mlflow.sklearn.log_model(
+            best_model,
+            "xgboost-pipeline",
+            skops_trusted_types=SKOPS_TRUSTED_TYPES,
+        )
         print(f"Model logged to MLflow (Run ID: {run.info.run_id})")
 
     # ── 7. Save Best Model for Deployment ─────────────────────────────────
